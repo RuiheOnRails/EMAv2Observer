@@ -5,23 +5,23 @@ var observerName = "";
 var courseID = "";
 var classAct = "";
 var studentBeh = "";
-var cogState = "";
-var currentObserving = "";
+var valance = "";
+var arousal ="";
 
 var trackingState = {
     classAct: "Discussion",
     studentBeh:"Chatting with friends",
-    cogState: "Bored",
+    valance: "1",
+    arousal: "1",
     currentTime: "",
 }
 
 var idToOtherMap = {
     classActSelector: "otherClassActText",
     studentActSelector: "otherBehText",
-    cogSelector: "otherStatetText"
 }
 
-var selectorIds = ["classActSelector", "studentActSelector", "cogSelector"]
+var selectorIds = ["classActSelector", "studentActSelector", "valSelector", "aroSelector"]
 
 function registerButton(){
     document.getElementById("btnStart").addEventListener("click", (e) =>{
@@ -32,7 +32,8 @@ function registerButton(){
         if(observerName === "" || courseID === ""){
             showModal();
         }else{
-            addToTrackingData("START", "START", "START", "START", getCurrentTimeInString());
+            addToTrackingData("START","START","START", "START","START",getCurrentTimeInString());
+            console.log(trackingData)
             enableBtns();
             enableSelectors();
             lockRequiredForm();
@@ -49,13 +50,13 @@ function registerButton(){
                     p,
                     trackingState.classAct,
                     trackingState.studentBeh,
-                    trackingState.cogState,
+                    trackingState.valance,
+                    trackingState.arousal,
                     trackingState.currentTime
                 );
             })
     
             document.querySelectorAll("textarea").forEach(el => {
-                console.log(el.value);
                 el.value = "";
             });
             
@@ -85,7 +86,7 @@ function registerButton(){
 
     document.getElementById("btnStop").addEventListener("click", e => {
         e.preventDefault();
-        addToTrackingData("STOP","STOP","STOP","STOP",getCurrentTimeInString());
+        addToTrackingData("STOP","STOP","STOP","STOP","STOP", getCurrentTimeInString());
     });
 
     document.getElementById("btnDownload").addEventListener("click", (e) =>{
@@ -114,21 +115,24 @@ function registerSelectors(id, key){
                 trackingState[key] = localtextArea.value;
             })
         }else{
-            document.getElementById(idToOtherMap[id]).setAttribute("disabled", true);
-            document.getElementById(idToOtherMap[id]).classList.add("d-none");
+            if(id in idToOtherMap){
+                document.getElementById(idToOtherMap[id]).setAttribute("disabled", true);
+                document.getElementById(idToOtherMap[id]).classList.add("d-none");
+            }
             trackingState[key] = selectedOption;
         }
     })
 }
 
-function addToTrackingData(partId, classActivity, studentBehavior, cognState, time){
+function addToTrackingData(partId, classActivity, studentBehavior, valance, arousal, time){
     let obj = {
         Observer: "",
         CourseID: "",
         Participant: "",
         "Class Activity": "",
         "Student's Specific Behavior": "", 
-        "Cognitive-affective state": "",
+        Valance: "",
+        Arousal: "",
         Date: "",
         TimeStamp: "",
     };
@@ -137,7 +141,8 @@ function addToTrackingData(partId, classActivity, studentBehavior, cognState, ti
     obj.Participant = partId;
     obj["Class Activity"] = classActivity.replace(/,/g, " ");
     obj["Student's Specific Behavior"] = studentBehavior.replace(/,/g, " ");
-    obj["Cognitive-affective state"] = cognState.replace(/,/g, " ");
+    obj.Valance = valance;
+    obj.Arousal = arousal;
     let datetimearray = time.split(",");
     obj.Date = datetimearray[0];
     obj.TimeStamp = datetimearray[1];
@@ -236,13 +241,13 @@ function disableBtns() {
 function disableSelectors(){
     document.getElementById("classActForm").setAttribute("disabled", true);
     document.getElementById("studentForm").setAttribute("disabled", true);
-    document.getElementById("cogStateForm").setAttribute("disabled", true);
+    document.getElementById("valAroForm").setAttribute("disabled", true);
 }
 
 function enableSelectors(){
     document.getElementById("classActForm").removeAttribute("disabled");
     document.getElementById("studentForm").removeAttribute("disabled");
-    document.getElementById("cogStateForm").removeAttribute("disabled");
+    document.getElementById("valAroForm").removeAttribute("disabled");
 }
 
 function enableBtns() {
@@ -283,7 +288,8 @@ function resetSelectors(){
 
 registerSelectors("classActSelector", "classAct");
 registerSelectors("studentActSelector", "studentBeh");
-registerSelectors("cogSelector", "cogState");
+registerSelectors("valSelector", "valance");
+registerSelectors("aroSelector", "arousal");
 
 disableBtns();
 disableSelectors();

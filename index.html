@@ -100,29 +100,32 @@
             </div>
         </form>
 
-        <form id=cogStateForm>
+        <form id=valAroForm>
             <legend>Cognitive-affective state</legend>
-            <p>
-                Bored, Concentrating, Confused, Delighted, Distracted
-                <br>
-                Engaged, Frustrated, Neutral, Suprised
-            </p>
-            <select class="form-control" id="cogSelector">
-                <option value="Bored">Bored</option>
-                <option value="Concentrating">Concentrating</option>
-                <option value="Confused">Confused</option>
-                <option value="Delighted">Delighted</option>
-                <option value="Distracted">Distracted</option>
-                <option value="Engaged">Engaged</option>
-                <option value="Frustrated">Frustrated</option>
-                <option value="Neutral">Neutral</option>
-                <option value="Suprised">Suprised</option>
-                <option value="otherStatetText">Other</option>
+            <p>Valance</p>
+            <select class="form-control" id="valSelector">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
             </select>
-
-            <div class="form-group mt-2">
-                <textarea class="form-control d-none" name="othertextarea" id="otherStatetText" placeholder="other state" ></textarea>
-            </div>
+            <p>Arousal</p>
+            <select class="form-control" id="aroSelector">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+            </select>
         </form>
 
         <button type="button" class="btn btn-primary btn-block mt-3" id="btnSubmit">Submit</button>
