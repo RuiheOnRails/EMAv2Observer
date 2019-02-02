@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Observation Notes</title>
+</head>
+
+<body>
+    <div class="toptext jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-5">Obervation Notes</h1>
+        </div>
+    </div>
+
+    <div id="centerStuff" class="container container-fluid ">
+        <form class="justify-content-center">
+            <div class="form-group">
+                <label for="observerName">Observer Name</label>
+                <input type="text" class="form-control" id="observerName" placeholder="enter your name here">
+            </div>
+            <div class="form-group">
+                <label for="courseID">Course ID</label>
+                <input type="text" class="form-control" id="courseID" placeholder="enter course ID here">
+            </div>
+        </form>
+        <div id="controlButtons"class="d-flex justify-content-center flex-wrap">
+            <button id="btnStart" name="Start" type="button" class="btn btn-outline-success m-1">Start</button>
+            <button id="btnStop" name="Stop" type="button" class="btn btn-outline-danger m-1">Stop</button>
+            <button id="btnDownload" type="button" class="btn btn-outline-info m-1">Download</button>
+        </div>
+
+        <button type="button" class="btn btn-info btn-block mt-3" id="btnRecTime">Record Time</button>
+
+        <form id='observingForm'>
+            <legend>Observing</legend>
+            <div class="d-flex">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="partcheckbox" id="p1checkbox" value="P1">
+                    <label class="form-check-label" for="p1checkbox">P1</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="partcheckbox" id="p2checkbox" value="P2">
+                    <label class="form-check-label" for="p2checkbox">P2</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="partcheckbox" id="p3checkbox" value="P3">
+                    <label class="form-check-label" for="p3checkbox">P3</label>
+                </div>
+                <div id="checkBtns"class="d-flex justify-content-center flex-wrap">
+                    <button id="btnCheckAll" name="all" type="button" class="btn btn-outline-success m-1">all</button>
+                    <button id="btnClearCheck" name="clear" type="button" class="btn btn-outline-warning m-1">clear</button>
+                </div>
+            </div>
+        </form>
+
+        <form id="classActForm">
+            <legend> Class activity</legend>
+            <p>
+                Discussion, Individual, Lecture, Paired or Group Activity, Q & A
+            </p>
+            <select class="form-control" id="classActSelector">             
+                <option value="Discussion">Discussion</option>
+                <option value="Individual">Individual</option>
+                <option value="Lecture">Lecture</option>
+                <option value="Paired or Group Activity">Paired or Group Activity</option>
+                <option value="Q & A">Q & A</option>
+                <option value="otherClassActText">Other</option>
+            </select>
+
+            <div class="form-group mt-2 ">
+                <textarea class="form-control d-none" name="othertextarea" id="otherClassActText" placeholder="other class activity" ></textarea>
+            </div>
+        </form>
+
+        <form id="studentForm">
+            <legend>Students' specific behavior</legend>
+            <p>Chatting with friends, Checking phone, Drinking water, Laughing, Listening/looking at slides
+                <br>
+                Looking around, Nodding Reading Notes, Typing/Writing Notes, Yawning
+            </p>
+            <select class="form-control" id="studentActSelector">
+                <option value="Chatting with friends">Chatting with friends</option>
+                <option value="Checking phone">Checking phone</option>
+                <option value="Drinking water">Drinking water</option>
+                <option value="Laughing">Laughing</option>
+                <option value="Listening/looking at slides">Listening/looking at slides</option>
+                <option value="Looking around">Looking around</option>
+                <option value="Nodding">Nodding</option>
+                <option value="Reading Notes">Reading Notes</option>
+                <option value="Typing/Writing Notes">Typing/Writing Notes</option>
+                <option value="Yawning">Yawning</option>
+                <option value="otherBehText">Other</option>
+            </select>
+
+            <div class="form-group mt-2">
+                <textarea class="form-control d-none" name="othertextarea" id="otherBehText" placeholder="other behavior" ></textarea>
+            </div>
+        </form>
+
+        <form id=cogStateForm>
+            <legend>Cognitive-affective state</legend>
+            <p>
+                Bored, Concentrating, Confused, Delighted, Distracted
+                <br>
+                Engaged, Frustrated, Neutral, Suprised
+            </p>
+            <select class="form-control" id="cogSelector">
+                <option value="Bored">Bored</option>
+                <option value="Concentrating">Concentrating</option>
+                <option value="Confused">Confused</option>
+                <option value="Delighted">Delighted</option>
+                <option value="Distracted">Distracted</option>
+                <option value="Engaged">Engaged</option>
+                <option value="Frustrated">Frustrated</option>
+                <option value="Neutral">Neutral</option>
+                <option value="Suprised">Suprised</option>
+                <option value="otherStatetText">Other</option>
+            </select>
+
+            <div class="form-group mt-2">
+                <textarea class="form-control d-none" name="othertextarea" id="otherStatetText" placeholder="other state" ></textarea>
+            </div>
+        </form>
+
+        <button type="button" class="btn btn-primary btn-block mt-3" id="btnSubmit">Submit</button>
+    </div>
+
+    <div class="botspacer my-3">
+
+    </div>
+
+    <div class="modal fade" id="requiredModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Enter Required Fields</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                Observer name and Course ID are required to continue
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="requirePartCheck" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">No Participant Checked</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                Please check at least 1 participant
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="index.js"></script>
+</html>
