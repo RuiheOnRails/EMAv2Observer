@@ -13,27 +13,50 @@ var trackingState = {
     studentBeh:"Chatting with friends",
     valance: "1",
     arousal: "1",
-    currentTime: "",
+    onoff: "on",
+    currentTime: ""
 }
 
 var idToOtherMap = {
     classActSelector: "otherClassActText",
-    studentActSelector: "otherBehText",
+    studentActSelector: "otherBehText"
 }
 
-var selectorIds = ["classActSelector", "studentActSelector", "valSelector", "aroSelector"]
+var ckBoxToLabelMap = {
+    p1checkbox: "lbforp1",
+    p2checkbox: "lbforp2",
+    p3checkbox: "lbforp3"
+}
+var ckBoxId = ["p1checkbox", "p2checkbox", "p3checkbox"];
+var ckBoxLbId = ["lbforp1", "lbforp2", "lbforp3" ];
+
+var selectorIds = ["classActSelector", "studentActSelector", "valSelector", "aroSelector", "onoffSelector"]
+
+function setCheckBoxAndEnable(ckId, name){
+   var ckbox = document.getElementById(ckId);
+    ckbox.classList.remove("d-none");
+    ckbox.removeAttribute("disabled");
+    ckbox.value = name;
+    document.getElementById(ckBoxToLabelMap[ckbox.id]).innerText = name;
+}
 
 function registerButton(){
     document.getElementById("btnStart").addEventListener("click", (e) =>{
         e.preventDefault();
         observerName = document.getElementById("observerName").value;
         courseID = document.getElementById("courseID").value;
+        var partIDsText = document.getElementById("partIDs").value.replace(/\s\s+/g, ' ');
 
-        if(observerName === "" || courseID === ""){
+        if(!observerName.trim() || !courseID.trim() || !partIDsText.trim() || partIDsText.split(" ").length > 3){
             showModal();
         }else{
-            addToTrackingData("START","START","START", "START","START",getCurrentTimeInString());
-            console.log(trackingData)
+            addToTrackingData("START","START","START", "START","START","START",getCurrentTimeInString());
+            var partIDsArray = partIDsText.split(" ")
+            var numberOfPartIDs = partIDsArray.length;
+            for(var i=0; i < numberOfPartIDs; i++){
+                console.log(i);
+                setCheckBoxAndEnable(ckBoxId[i], partIDsArray[i]);
+            }
             enableBtns();
             enableSelectors();
             lockRequiredForm();
@@ -52,6 +75,7 @@ function registerButton(){
                     trackingState.studentBeh,
                     trackingState.valance,
                     trackingState.arousal,
+                    trackingState.onoff,
                     trackingState.currentTime
                 );
             })
@@ -73,7 +97,9 @@ function registerButton(){
     document.getElementById("btnCheckAll").addEventListener("click", (e) => {
         e.preventDefault();
         document.getElementsByName("partcheckbox").forEach(c => {
-            c.checked = true;
+            if(!c.hasAttribute("disabled")){
+                c.checked = true;
+            }
         })
     })
 
@@ -86,7 +112,7 @@ function registerButton(){
 
     document.getElementById("btnStop").addEventListener("click", e => {
         e.preventDefault();
-        addToTrackingData("STOP","STOP","STOP","STOP","STOP", getCurrentTimeInString());
+        addToTrackingData("STOP","STOP","STOP","STOP","STOP","STOP", getCurrentTimeInString());
     });
 
     document.getElementById("btnDownload").addEventListener("click", (e) =>{
@@ -124,7 +150,7 @@ function registerSelectors(id, key){
     })
 }
 
-function addToTrackingData(partId, classActivity, studentBehavior, valance, arousal, time){
+function addToTrackingData(partId, classActivity, studentBehavior, valance, arousal, onofftask, time){
     let obj = {
         Observer: "",
         CourseID: "",
@@ -133,6 +159,7 @@ function addToTrackingData(partId, classActivity, studentBehavior, valance, arou
         "Student's Specific Behavior": "", 
         Valance: "",
         Arousal: "",
+        "On/off task": "",
         Date: "",
         TimeStamp: "",
     };
@@ -143,6 +170,7 @@ function addToTrackingData(partId, classActivity, studentBehavior, valance, arou
     obj["Student's Specific Behavior"] = studentBehavior.replace(/,/g, " ");
     obj.Valance = valance;
     obj.Arousal = arousal;
+    obj["On/off task"] = onofftask;
     let datetimearray = time.split(",");
     obj.Date = datetimearray[0];
     obj.TimeStamp = datetimearray[1];
@@ -163,10 +191,12 @@ function showModal(){
     $("#requiredModal").modal('show');
 
     $("#requiredModal").on('hidden.bs.modal', function () {
-        if(observerName === ""){
-            document.getElementById("partID").focus();
-        }else{
+        if(!observerName.trim()){
+            document.getElementById("observerName").focus();
+        }else if(!courseID.trim()){
             document.getElementById("courseID").focus();
+        }else{
+            document.getElementById("partIDs").focus();
         }
     });
 }
@@ -242,12 +272,14 @@ function disableSelectors(){
     document.getElementById("classActForm").setAttribute("disabled", true);
     document.getElementById("studentForm").setAttribute("disabled", true);
     document.getElementById("valAroForm").setAttribute("disabled", true);
+    document.getElementById("onoffForm").setAttribute("disabled", true);
 }
 
 function enableSelectors(){
     document.getElementById("classActForm").removeAttribute("disabled");
     document.getElementById("studentForm").removeAttribute("disabled");
     document.getElementById("valAroForm").removeAttribute("disabled");
+    document.getElementById("onoffForm").removeAttribute("disabled");
 }
 
 function enableBtns() {
@@ -258,12 +290,14 @@ function enableBtns() {
 
 function lockRequiredForm(){
     document.getElementById("observerName").setAttribute("readonly", true);
-    document.getElementById("courseID").setAttribute("readonly", true);
+    document.getElementById("courseID").setAttribute("readonly", true); 
+    document.getElementById("partIDs").setAttribute("readonly", true); 
 }
 
 function enableRequiredForm(){
     document.getElementById("observerName").removeAttribute("readonly");
     document.getElementById("courseID").removeAttribute("readonly");
+    document.getElementById("partIDs").removeAttribute("readonly");
 }
 
 function disbaleSubmit() {
@@ -290,6 +324,7 @@ registerSelectors("classActSelector", "classAct");
 registerSelectors("studentActSelector", "studentBeh");
 registerSelectors("valSelector", "valance");
 registerSelectors("aroSelector", "arousal");
+registerSelectors("onoffSelector", "onoff");
 
 disableBtns();
 disableSelectors();

@@ -25,6 +25,11 @@
                 <label for="courseID">Course ID</label>
                 <input type="text" class="form-control" id="courseID" placeholder="enter course ID here">
             </div>
+            <div class="form-group">
+                <label for="partIDs">Participant IDs</label>
+                <input type="text" class="form-control" id="partIDs" 
+                placeholder="enter 3 participant IDs you are observing seperated by space">
+            </div>
         </form>
         <div id="controlButtons"class="d-flex justify-content-center flex-wrap">
             <button id="btnStart" name="Start" type="button" class="btn btn-outline-success m-1">Start</button>
@@ -38,16 +43,16 @@
             <legend>Observing</legend>
             <div class="d-flex">
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="partcheckbox" id="p1checkbox" value="P1">
-                    <label class="form-check-label" for="p1checkbox">P1</label>
+                    <input class="form-check-input" type="checkbox" name="partcheckbox" id="p1checkbox" value="P1" disabled>
+                    <label id="lbforp1" class="form-check-label" for="p1checkbox">P1</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="partcheckbox" id="p2checkbox" value="P2">
-                    <label class="form-check-label" for="p2checkbox">P2</label>
+                    <input class="form-check-input" type="checkbox" name="partcheckbox" id="p2checkbox" value="P2" disabled>
+                    <label id="lbforp2" class="form-check-label" for="p2checkbox">P2</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="partcheckbox" id="p3checkbox" value="P3">
-                    <label class="form-check-label" for="p3checkbox">P3</label>
+                    <input class="form-check-input" type="checkbox" name="partcheckbox" id="p3checkbox" value="P3" disabled>
+                    <label id="lbforp3" class="form-check-label" for="p3checkbox">P3</label>
                 </div>
                 <div id="checkBtns"class="d-flex justify-content-center flex-wrap">
                     <button id="btnCheckAll" name="all" type="button" class="btn btn-outline-success m-1">all</button>
@@ -57,7 +62,7 @@
         </form>
 
         <form id="classActForm">
-            <legend> Class activity</legend>
+            <legend class="mt-3"> Class activity</legend>
             <p>
                 Discussion, Individual, Lecture, Paired or Group Activity, Q & A
             </p>
@@ -76,7 +81,7 @@
         </form>
 
         <form id="studentForm">
-            <legend>Students' specific behavior</legend>
+            <legend class="mt-3">Students' specific behavior</legend>
             <p>Chatting with friends, Checking phone, Drinking water, Laughing, Listening/looking at slides
                 <br>
                 Looking around, Nodding Reading Notes, Typing/Writing Notes, Yawning
@@ -101,7 +106,7 @@
         </form>
 
         <form id=valAroForm>
-            <legend>Cognitive-affective state</legend>
+            <legend class="mt-3">Valance Arousal Scale</legend>
             <p>Valance</p>
             <select class="form-control" id="valSelector">
                 <option value="1">1</option>
@@ -109,10 +114,6 @@
                 <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
             </select>
             <p>Arousal</p>
             <select class="form-control" id="aroSelector">
@@ -121,10 +122,14 @@
                 <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
+            </select>
+        </form>
+
+        <form id=onoffForm>
+            <legend class="mt-3">On/Off task</legend>
+            <select class="form-control" id="onoffSelector">
+                <option value="on">on</option>
+                <option value="off">off</option>
             </select>
         </form>
 
@@ -145,7 +150,8 @@
               </button>
             </div>
             <div class="modal-body">
-                Observer name and Course ID are required to continue
+                Observer name, Course ID, Participant IDs are required to continue.
+                No more than 3 participant ids allowed.
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
