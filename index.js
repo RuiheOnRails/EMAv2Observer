@@ -9,8 +9,8 @@ var valance = "";
 var arousal ="";
 
 var trackingState = {
-    classAct: "Discussion",
-    studentBeh:"Chatting with friends",
+    classAct: "Individual",
+    studentBeh:"Checking phone",
     valance: "1",
     arousal: "1",
     onoff: "on",
@@ -19,7 +19,8 @@ var trackingState = {
 
 var idToOtherMap = {
     classActSelector: "otherClassActText",
-    studentActSelector: "otherBehText"
+    studentActSelector: "otherBehText",
+    onoffSelector: "otherTaskText"
 }
 
 var ckBoxToLabelMap = {
@@ -47,11 +48,11 @@ function registerButton(){
         courseID = document.getElementById("courseID").value;
         var partIDsText = document.getElementById("partIDs").value.replace(/\s\s+/g, ' ');
 
-        if(!observerName.trim() || !courseID.trim() || !partIDsText.trim() || partIDsText.split(" ").length > 3){
+        if(!observerName.trim() || !courseID.trim() || !partIDsText.trim() || partIDsText.trim().split(" ").length > 3){
             showModal();
         }else{
             addToTrackingData("START","START","START", "START","START","START",getCurrentTimeInString());
-            var partIDsArray = partIDsText.split(" ")
+            var partIDsArray = partIDsText.trim().split(" ")
             var numberOfPartIDs = partIDsArray.length;
             for(var i=0; i < numberOfPartIDs; i++){
                 console.log(i);

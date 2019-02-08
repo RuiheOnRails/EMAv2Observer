@@ -64,10 +64,9 @@
         <form id="classActForm">
             <legend class="mt-3"> Class activity</legend>
             <p>
-                Discussion, Individual, Lecture, Paired or Group Activity, Q & A
+            Individual, Lecture, Paired or Group Activity, Q & A
             </p>
             <select class="form-control" id="classActSelector">             
-                <option value="Discussion">Discussion</option>
                 <option value="Individual">Individual</option>
                 <option value="Lecture">Lecture</option>
                 <option value="Paired or Group Activity">Paired or Group Activity</option>
@@ -82,21 +81,25 @@
 
         <form id="studentForm">
             <legend class="mt-3">Students' specific behavior</legend>
-            <p>Chatting with friends, Checking phone, Drinking water, Laughing, Listening/looking at slides
+            <p>Checking phone, Class-related discussion, Drinking water, Falling asleep, Laughing, Listening/looking at presentation/instructors
                 <br>
-                Looking around, Nodding Reading Notes, Typing/Writing Notes, Yawning
+                Looking around, Looking at laptop, Nodding, Non-class-related chatting, Reading Notes, Writing notes, Yawning, Zoning out
             </p>
             <select class="form-control" id="studentActSelector">
-                <option value="Chatting with friends">Chatting with friends</option>
                 <option value="Checking phone">Checking phone</option>
+                <option value="Class-related discussion">Class-related discussion</option>
                 <option value="Drinking water">Drinking water</option>
+                <option value="Falling asleep">Falling asleep</option>
                 <option value="Laughing">Laughing</option>
-                <option value="Listening/looking at slides">Listening/looking at slides</option>
+                <option value="Listening/looking at presentation/instructors">Listening/looking at presentation/instructors</option>
                 <option value="Looking around">Looking around</option>
-                <option value="Nodding">Nodding</option>
+                <option value="Looking at laptop">Looking at laptop</option>
+                <option value="Nodding">Nodding</option> 
+                <option value="Non-class-related chatting">Non-class-related chatting</option> 
                 <option value="Reading Notes">Reading Notes</option>
-                <option value="Typing/Writing Notes">Typing/Writing Notes</option>
-                <option value="Yawning">Yawning</option>
+                <option value="Writing notes"> Writing notes</option>
+                <option value="Yawning">Yawning</option> 
+                <option value="Zoning out">Zoning out</option>
                 <option value="otherBehText">Other</option>
             </select>
 
@@ -107,7 +110,13 @@
 
         <form id=valAroForm>
             <legend class="mt-3">Valance Arousal Scale</legend>
-            <p>Valance</p>
+            <p> <b>Valence</b> (negative -> positive emotion): 
+                <br> <b>1</b> (extremely unhappy, angry, extremely frustrated)
+                <br> <b>2</b> (seems a little upset, unhappy, negative)
+                <br> <b>3</b> (Neutral, neither negative or positive emotion exhibited)
+                <br> <b>4</b> (happy, smiling, enjoying the lecture, etc.)
+                <br> <b>5</b> (extremely happy, e.g., instructor cancelled class/quiz/exam/assignment, students would be cheering loudly, very excited, over the roof)
+            </p>
             <select class="form-control" id="valSelector">
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -115,7 +124,14 @@
                 <option value="4">4</option>
                 <option value="5">5</option>
             </select>
-            <p>Arousal</p>
+            <p>
+                <b>Arousal</b> (sleep -> wideawake): 
+                <br> <b>1</b> (extremely sleepy, already fall asleep during class)
+                <br> <b>2</b> (tired, low energy)
+                <br> <b>3</b> (neutral, neither energetic nor sleepy)
+                <br> <b>4</b> (actively engaged, has interaction with the class and instructors. For example, raise their hands during class, answer instructors’ questions by themselves or in front of whole class, nodding or shaking their heads, smiling, etc. )
+                <br> <b>5</b> (strong reaction, laughing super hard, arguing with instructors intensely during class, intense body movement and strong reaction)  
+            </p>
             <select class="form-control" id="aroSelector">
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -130,7 +146,12 @@
             <select class="form-control" id="onoffSelector">
                 <option value="on">on</option>
                 <option value="off">off</option>
+                <option value="N/A(using laptop)">N/A(using laptop)</option>
+                <option value="otherTaskText">other</option>
             </select>
+            <div class="form-group mt-2">
+                <textarea class="form-control d-none" name="othertextarea" id="otherTaskText" placeholder="other task description" ></textarea>
+            </div>
         </form>
 
         <button type="button" class="btn btn-primary btn-block mt-3" id="btnSubmit">Submit</button>
