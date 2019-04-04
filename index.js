@@ -10,7 +10,7 @@ var arousal ="";
 
 var trackingState = {
     classAct: "Individual",
-    studentBeh:"Checking phone",
+    studentBeh: "Asking instructor question",
     valance: "1",
     arousal: "1",
     onoff: "on",
